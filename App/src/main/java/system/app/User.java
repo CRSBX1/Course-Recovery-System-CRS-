@@ -10,7 +10,7 @@ import java.security.SecureRandom;
  *
  * @author Lenovo
  */
-public class User {
+abstract class User {
     private String userID;
     private String name;
     private String email;
