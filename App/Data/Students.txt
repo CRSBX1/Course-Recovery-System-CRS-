@@ -1,0 +1,10 @@
+S000001,Ethan Hunt,Ethan01@university.edu,Data Analytics,2025,3
+S000002,Crazy Frog,Crazy02@university.edu,Psychology,2024,5
+S000003,Ray Park,Ray03@university.edu,International Relations,2023,7
+S000004,Arthur Penkins,Arthur04@university.edu,Business Management,2025,4
+S000005,Mateo Hernandez,Mateo05@university.edu,Software Engineering,2024,5
+S000006,Marco Van Basten,Marco06@university.edu,Food Science,2023,7
+S000007,Bruce Banner,Bruce07@university.edu,Software Engineering,2024,5
+S000008,Steven Cook,Steven08@university.edu,Electrical Engineering,2025,3
+S000009,Stephen Cook,Stephen09@university.edu,Aerospace Engineering,2025,3
+S000010,Joe Parks,Joe10@university.edu,Data Analytics,2024,5

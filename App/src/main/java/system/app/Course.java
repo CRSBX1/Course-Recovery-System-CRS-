@@ -16,6 +16,15 @@ public class Course {
    private String instructor;
    private int capacity;
    
+   public Course(String id, String name, int hours, int semester, String instructor, int capacity){
+       courseID = id;
+       courseName = name;
+       creditHours = hours;
+       this.semester = semester;
+       this.instructor = instructor;
+       this.capacity = capacity;
+   }
+   
    public void assignInstructor(String ins){
    //Extra feature? Not sure about this one
    }

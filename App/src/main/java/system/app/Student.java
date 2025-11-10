@@ -22,6 +22,15 @@ public class Student {
     private ArrayList<Course> failedCourses;
     private Course course;
     
+    public Student(String id, String name, String email, String program, int year, int semester){
+        studentID = id;
+        fullName = name;
+        this.email = email;
+        this.program = program;
+        this.year = year;
+        this.semester = semester;
+    }
+    
     public double calculateCGPA(){
         cgpa = totalGradePoints/totalCreditHours;
         return cgpa;
@@ -35,6 +44,10 @@ public class Student {
         //Counts as extra feature, let's figure out the essentials first
     }
     
+    public String getName(){
+        return fullName;
+    }
+    
     public double getTotalGradePoints() {
         return totalGradePoints;
     }
@@ -46,4 +59,6 @@ public class Student {
     public void updateAcademicInfo() {
         //I don't know what this method is for ngl. Kind of a scope creep maybe?
     }
+    
+    
 }

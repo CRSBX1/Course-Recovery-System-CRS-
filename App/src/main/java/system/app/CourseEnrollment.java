@@ -1,0 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package system.app;
+import java.time.*;
+import java.util.*;
+
+/**
+ *
+ * @author Lenovo
+ */
+public class CourseEnrollment {
+    private String enrollmentID;
+    private LocalDate enrollmentDate;
+    private String status;
+    private String grade;
+    private double gradePoint;
+    private int attemptNumber;
+    private ArrayList<String> failedComponents = new ArrayList<>();
+    
+    public CourseEnrollment(){
+        attemptNumber = 0;
+    }
+    
+    public void updateStatus(String status){
+        this.status = status;
+    }
+    
+    public void updateGrade(String grade, double gradePoint){
+        this.grade = grade;
+        this.gradePoint = gradePoint;
+    }
+    
+    public void incrementAttempt(){
+       attemptNumber += 1; 
+    }
+    
+    public boolean isMaxAttemptsReached(){
+        return attemptNumber == 3;
+    }
+    
+    public void addFailedComponent(String component){
+        failedComponents.add(component);
+    }
+    
+    public List<String> getFailedComponent(String component){
+        return failedComponents;
+    }
+    
+    public boolean requiresFullRetake(){
+        return failedComponents.size() == 3 || attemptNumber == 2;    
+        //3 components = assignment, midterms, and finals
+        //If failed all components, require full course retake
+    }
+}
