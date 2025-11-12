@@ -1,0 +1,16 @@
+C001,Introduction to Java,4,1,Dr. Jobe Simons,300
+C002,Fundamentals of Psychology,3,1,Dr. Alice Tan,250
+C003,Data Analytics and Visualization,4,2,Dr. Mark Raymond,200
+C004,Principles of Business Management,3,1,Prof. Sarah Ng,350
+C005,Introduction to Software Engineering,4,2,Dr. Henry Lau,400
+C006,Food Chemistry and Processing,3,2,Dr. Emily Wong,180
+C007,Electrical Circuit Fundamentals,4,1,Dr. Amir Rahman,220
+C008,Aerospace Materials and Structures,4,3,Prof. Daniel Yeoh,150
+C009,Database Systems for Analytics,3,3,Dr. Jobe Simons,200
+C010,Cross-Cultural Psychology,3,2,Dr. Alice Tan,250
+C011,Global Political Systems,3,3,Prof. Lina Hassan,230
+C012,Entrepreneurship and Innovation,4,2,Prof. Sarah Ng,300
+C013,Advanced Software Design,4,4,Dr. Henry Lau,280
+C014,Electrical Machines and Drives,3,3,Dr. Amir Rahman,200
+C015,Spacecraft Dynamics,4,4,Prof. Daniel Yeoh,120
+C016,Food Safety and Quality Assurance,3,3,Dr. Emily Wong,180
