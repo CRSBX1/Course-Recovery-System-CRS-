@@ -26,11 +26,17 @@ public class Course {
    }
    
    public void assignInstructor(String ins){
-   //Extra feature? Not sure about this one
+       instructor = ins;
    }
    
-   public void updateCourseDetails(){
-   //Extra feature again
+   public void updateCourseDetails(int hours, int capacity, int semester){
+       creditHours = hours;
+       this.capacity = capacity;
+       this.semester = semester;
+   }
+   
+   public String getID(){
+       return courseID;
    }
    
    public int getCreditHours(){

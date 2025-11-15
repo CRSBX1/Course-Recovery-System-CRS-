@@ -12,7 +12,7 @@ public class AcademicOfficer extends User {
     private String officeID;
     private String department;
     
-    public void enrollStudent(Student student, Course course){
+    public void enrollStudent(Student student){
         //I'll figure this out later
     }
     
