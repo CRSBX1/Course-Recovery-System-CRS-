@@ -48,11 +48,9 @@ public class FileUtils {
     public static CourseEnrollment parseEnroll(String line){
         ArrayList<String> components = new ArrayList<>();
         String[] parts = line.split(",");
-        for(int i=8;i<=parts.length;i++){
+        for(int i=9;i<=parts.length;i++){
             components.add(parts[i]);  
         }
-        return new CourseEnrollment(parts[0],parts[1],parts[2],LocalDate.parse(parts[3]),parts[4],parts[5],Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),components);
-    }
-    
-    
+        return new CourseEnrollment(parts[0],parts[1],parts[2],LocalDate.parse(parts[3]),parts[4],Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),components);
+    }    
 }

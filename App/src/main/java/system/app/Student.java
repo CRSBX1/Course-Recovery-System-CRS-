@@ -30,11 +30,9 @@ public class Student {
         this.program = program;
         this.year = year;
         this.semester = semester;
-        totalCreditHours = 0;
-        totalGradePoints = 0;
         
         enrollment = DataRepository.enrollList.stream()
-                .filter(i -> i.getStudentID().equals(studentID)).toList();
+                .filter(i -> i.getStudentID().equals(id)).toList();
         
         for(CourseEnrollment i: enrollment){
             for(Course e: DataRepository.courseList){
@@ -57,13 +55,15 @@ public class Student {
     }
     
     public double getTotalGradePoints() {
+        totalGradePoints = 0;
         for(CourseEnrollment i: enrollment){
-            totalGradePoints += i.getGradePoint();
+            totalGradePoints += i.getOverallGradePoint();
         }
         return totalGradePoints;
     }
     
     public int getTotalCreditHours() {
+        totalCreditHours = 0;
         for(Course e: allCourses){
             totalCreditHours += e.getCreditHours();  
         }
