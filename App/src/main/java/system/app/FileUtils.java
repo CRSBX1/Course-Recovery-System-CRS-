@@ -5,6 +5,7 @@
 package system.app;
 import java.util.*;
 import java.io.*;
+import java.time.*;
 /**
  *
  * @author Lenovo
@@ -15,7 +16,7 @@ public class FileUtils {
         throw new AssertionError("This class can't be instantiated since its made for utility purposes");
     }
     
-    @FunctionalInterface
+    @FunctionalInterface //Can only contain one abstract method
     public interface lineParser<T>{
         T parser(String line);
     }
@@ -44,5 +45,12 @@ public class FileUtils {
         return new Course(parts[0],parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),parts[4],Integer.parseInt(parts[5]));
     }
     
-    
+    public static CourseEnrollment parseEnroll(String line){
+        ArrayList<String> components = new ArrayList<>();
+        String[] parts = line.split(",");
+        for(int i=9;i<=parts.length;i++){
+            components.add(parts[i]);  
+        }
+        return new CourseEnrollment(parts[0],parts[1],parts[2],LocalDate.parse(parts[3]),parts[4],Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),components);
+    }    
 }

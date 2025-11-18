@@ -12,8 +12,14 @@ public class AcademicOfficer extends User {
     private String officeID;
     private String department;
     
-    public void enrollStudent(Student student, Course course){
-        //I'll figure this out later
+    public boolean enrollStudent(Student student){
+        EligibilityChecker check = new EligibilityChecker();
+        if(check.checkProgressionEligibility(student)){
+            //send email to student that they're allowed to enroll
+            return true;
+        }
+        return false;
+        
     }
     
 }
