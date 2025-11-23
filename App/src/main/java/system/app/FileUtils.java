@@ -18,7 +18,12 @@ public class FileUtils {
     
     @FunctionalInterface //Can only contain one abstract method
     public interface lineParser<T>{
-        T parser(String line);
+        T parser(String line); //Interface for data parse
+    }
+    
+    @FunctionalInterface
+    public interface destination{
+        HashMap<Integer,String> dataMap(); //Interface for different maps
     }
     
     public static <T> List<T> readFromFile(String filename, lineParser<T> parse) throws IOException{
@@ -35,9 +40,30 @@ public class FileUtils {
         return list;
     }
     
+    public static void writeToFile(String fileName, destination map) throws IOException{
+        try{
+           FileWriter clearFile = new FileWriter(fileName); //Use filewriter to clear file
+           clearFile.close();
+        }
+        catch(IOException e){
+            System.out.println("Error when writing to file: " + e.getMessage());
+        }
+        
+        try{
+           FileWriter write = new FileWriter(fileName,true);
+           for(String s: map.dataMap().values()){
+               write.append(s);
+           }
+           write.close();
+        }
+        catch(IOException e){
+            System.out.println("Error when writing to file: " + e.getMessage());
+        }
+    }
+    
     public static Student parseStudent(String line){
         String[] parts = line.split(",");
-        return new Student(parts[0],parts[1],parts[2],parts[3],Integer.parseInt(parts[4]),Integer.parseInt(parts[5]));
+        return new Student(parts[0],parts[1],parts[2],parts[3],Integer.parseInt(parts[4]),Integer.parseInt(parts[5]),parts[6]);
     }
     
     public static Course parseCourse(String line){
@@ -48,9 +74,21 @@ public class FileUtils {
     public static CourseEnrollment parseEnroll(String line){
         ArrayList<String> components = new ArrayList<>();
         String[] parts = line.split(",");
-        for(int i=9;i<=parts.length;i++){
+        for(int i=9;i<parts.length;i++){
             components.add(parts[i]);  
         }
-        return new CourseEnrollment(parts[0],parts[1],parts[2],LocalDate.parse(parts[3]),parts[4],Integer.parseInt(parts[5]),Integer.parseInt(parts[6]),Integer.parseInt(parts[7]),Integer.parseInt(parts[8]),components);
-    }    
+        return new CourseEnrollment(parts[0],parts[1],parts[2],LocalDate.parse(parts[3]),parts[4],Double.parseDouble(parts[5]),Double.parseDouble(parts[6]),Double.parseDouble(parts[7]),Integer.parseInt(parts[8]),components);
+        //String id, String student, String course, LocalDate date, String status, double asg_score, double mid_score, double final_score, int attempt, ArrayList<String> failed
+    }
+    
+    public static HashMap writeStudent(){
+        int counter = 0;
+        HashMap<Integer,String> studentMap = new HashMap<>();
+        for(Student i: DataRepository.studentList){
+            String credentials = i.getStudentID()+","+i.getStudentName()+","+i.getEmail()+","+i.getStudentProgram()+","+Integer.toString(i.getYear())+","+Integer.toString(i.getSemester())+","+i.getEnrollStatus()+"\n";
+            studentMap.put(counter, credentials);
+            counter++;
+        }
+        return studentMap;
+    }
 }
