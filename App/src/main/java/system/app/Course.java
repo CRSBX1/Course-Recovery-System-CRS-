@@ -47,6 +47,10 @@ public class Course {
        return creditHours;
    }
    
+   public String getCourseName(){
+       return courseName;
+   }
+   
    public String[] getCourseInfo(){
        return  new String []{courseID, courseName};
    }

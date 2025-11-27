@@ -89,6 +89,24 @@ public class Student {
     public double getFailedCoursesCount() {
         return failedCourses.size();
     }
+    public List<CourseEnrollment> getEnrollment() {
+        return enrollment;
+    }
+    public String getStudentID() {
+        return studentID;
+    }
+    public String getProgram() {
+        return program;
+    }
+    public int getYear() {
+        return year;
+    }
+    public int getSemester() {
+        return semester;
+    }
+    public String getEmail() {
+        return email;
+    }
     
     public void setEnrollStatus(String status){
         enrollStatus = status;
