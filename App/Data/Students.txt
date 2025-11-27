@@ -8,4 +8,4 @@ S000007,Bruce Banner,Bruce07@university.edu,Software Engineering,2024,5,Not Enro
 S000008,Steven Cook,Steven08@university.edu,Electrical Engineering,2025,3,Not Enrolled
 S000009,Stephen Cook,Stephen09@university.edu,Aerospace Engineering,2025,3,Not Enrolled
 S000010,Joe Parks,Joe10@university.edu,Data Analytics,2024,5,Not Enrolled
-S000011,Lionel Pessi,LP11@university.edu,Data Analytics,2024,5,Enrolled
+S000011,Lionel Pessi,antoni.lmf88@gmail.com,Data Analytics,2024,5,Enrolled

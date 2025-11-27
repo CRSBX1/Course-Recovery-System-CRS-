@@ -105,6 +105,7 @@ public class EnrollStudentFrame{
                     dialog = new EnrollStudentDialog(frame, s.getStudentName() + " is eligible for enrollment.","Enroll");
                     s.setEnrollStatus("Enrolled");
                     FileUtils.writeToFile("Data/Students.txt", FileUtils::writeStudent);
+                    EmailPart.sendEnrollmentEmail(s);
                     model.refreshTableContents();
                 } catch (IOException ex) {
                    System.out.println("Error when enrolling student: " + ex.getMessage());
