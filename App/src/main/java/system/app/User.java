@@ -2,6 +2,7 @@ package system.app;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -10,6 +11,12 @@ import java.util.UUID;
  */
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    // Static counter for generating sequential IDs starting from 100
+    private static int idCounter = 100;
+
+    // Date formatter for readable timestamps (HH:mm:ss format)
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
     // Private fields - Encapsulation
     private String userId;
@@ -24,7 +31,7 @@ public class User implements Serializable {
 
     // Constructor
     public User(String username, String password, String email, UserRole role, String createdBy) {
-        this.userId = UUID.randomUUID().toString();
+        this.userId = generateUserId();
         this.username = username;
         this.password = password;
         this.email = email;
@@ -47,6 +54,51 @@ public class User implements Serializable {
         this.createdAt = createdAt;
         this.lastLogin = lastLogin;
         this.createdBy = createdBy;
+
+        // Update counter if loaded ID is higher
+        updateCounterFromId(userId);
+    }
+
+    /**
+     * Generate new user ID in format: ID100, ID101, ID102, etc.
+     * Range: ID100 to ID500
+     */
+    private static synchronized String generateUserId() {
+        if (idCounter > 500) {
+            throw new IllegalStateException("Maximum user limit reached (ID500)");
+        }
+        return "ID" + (idCounter++);
+    }
+
+    /**
+     * Update the static counter when loading users from file
+     * to prevent ID conflicts
+     */
+    private static synchronized void updateCounterFromId(String userId) {
+        if (userId != null && userId.startsWith("ID")) {
+            try {
+                int idNum = Integer.parseInt(userId.substring(2));
+                if (idNum >= idCounter && idNum < 500) {
+                    idCounter = idNum + 1;
+                }
+            } catch (NumberFormatException e) {
+                // Ignore invalid format
+            }
+        }
+    }
+
+    /**
+     * Reset counter to 100 (useful for testing)
+     */
+    public static synchronized void resetIdCounter() {
+        idCounter = 100;
+    }
+
+    /**
+     * Get current counter value (useful for debugging)
+     */
+    public static synchronized int getCurrentCounter() {
+        return idCounter;
     }
 
     // Getters and Setters - Encapsulation
@@ -127,8 +179,9 @@ public class User implements Serializable {
     public String toFileFormat() {
         return String.format("%s|%s|%s|%s|%s|%s|%s|%s|%s",
                 userId, username, password, email, role.name(),
-                isActive, createdAt,
-                lastLogin != null ? lastLogin : "null",
+                isActive,
+                createdAt.format(TIME_FORMATTER),
+                lastLogin != null ? lastLogin.format(TIME_FORMATTER) : "null",
                 createdBy);
     }
 
