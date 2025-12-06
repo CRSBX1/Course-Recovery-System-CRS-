@@ -39,6 +39,10 @@ public class Course {
        return courseID;
    }
    
+   public String getName(){
+       return courseName;
+   }
+   
    public int getCreditHours(){
        return creditHours;
    }
