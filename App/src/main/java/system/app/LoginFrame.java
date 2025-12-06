@@ -102,7 +102,9 @@ public class LoginFrame extends JFrame {
 
             if (session != null) {
                 dispose();
-                new DashboardFrame(userManager, session);
+                
+                
+                new AdminDashboardFrame(userManager, session);
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Invalid username or password",

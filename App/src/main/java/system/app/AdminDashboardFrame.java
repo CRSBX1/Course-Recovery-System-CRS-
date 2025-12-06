@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DashboardFrame extends JFrame {
+public class AdminDashboardFrame extends JFrame {
 
     private final UserManager userManager;
     private final LoginSession session;
@@ -20,7 +20,7 @@ public class DashboardFrame extends JFrame {
     private DefaultTableModel tableModel;
     private JTable table;
 
-    public DashboardFrame(UserManager userManager, LoginSession session) {
+    public AdminDashboardFrame(UserManager userManager, LoginSession session) {
         this.userManager = userManager;
         this.session = session;
 

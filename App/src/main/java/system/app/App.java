@@ -25,7 +25,7 @@ public class App {
         DataRepository.linkAll();
 
         //EnrollStudentFrame frame = new EnrollStudentFrame();
-        /**SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Generate Academic Report - Preview");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1440, 1024);
@@ -35,8 +35,8 @@ public class App {
 
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-        });**/
+        });
         
-        SwingUtilities.invokeLater(() -> new LoginFrame(new UserManager()));
+        //SwingUtilities.invokeLater(() -> new LoginFrame(new UserManager()));
     }
 }

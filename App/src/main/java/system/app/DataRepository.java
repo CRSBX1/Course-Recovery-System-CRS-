@@ -45,35 +45,33 @@ public class DataRepository {
    }
     
     public static void linkAll() {
-    for (Student s : studentList) {
-        List<CourseEnrollment> eList = enrollList.stream()
-                .filter(e -> e.getStudentID().equals(s.getStudentID()))
-                .toList();
+        for (Student s : studentList) {
+            int totalScore = 0;
+            int totalCredit = 0;
+            List<CourseEnrollment> eList = enrollList.stream()
+                    .filter(e -> e.getStudentID().equals(s.getStudentID()))
+                    .toList();
 
-        s.setEnrollment(eList);
+            s.setEnrollment(eList);
 
-        List<Course> failed = new ArrayList<>();
-        List<Course> all = new ArrayList<>();
-        
-        for (CourseEnrollment ce : eList) {
-            Course course = findCourseByID(ce.getCourseID());
-            if (course != null) {
+            List<Course> failed = new ArrayList<>();
+            List<Course> all = new ArrayList<>();
+
+            for (CourseEnrollment ce : eList) {
+                Course course = findCourseByID(ce.getCourseID());
+                totalScore += ce.getOverallGradePoint() * course.getCreditHours();
+                totalCredit += course.getCreditHours();
                 all.add(course);
-                ce.setOverallGradePoint(course.getCreditHours());
-                //add
                 if (!ce.getStatus().equals("Passed")) {
                     failed.add(course);
-                }
+                } 
             }
+            
+            s.setFailedCourses(failed);
+            s.setAllCourses(all);
+            s.setTotalGradePoints(totalScore);
+            s.setTotalCreditHours(totalCredit);
+            s.setCGPA();
         }
-
-        s.setFailedCourses(failed);
-        s.setAllCourses(all);
-        s.setTotalGradePoints();
-        s.setTotalCreditHours();
-        s.setCGPA();
-        
     }
-}
-
 }

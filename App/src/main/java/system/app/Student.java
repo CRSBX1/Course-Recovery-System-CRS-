@@ -113,18 +113,12 @@ public class Student {
         allCourses = course;
     }
     
-    public final void setTotalGradePoints() {
-        totalGradePoints = 0;
-        for(CourseEnrollment i: enrollment){
-            totalGradePoints += i.getOverallGradePoint();
-        }
+    public final void setTotalGradePoints(double gp) {
+        totalGradePoints = gp;
     }
     
-    public final void setTotalCreditHours() {
-        totalCreditHours = 0;
-        for(Course e: allCourses){
-            totalCreditHours += e.getCreditHours();  
-        }
+    public final void setTotalCreditHours(int ch) {
+        totalCreditHours = ch;
     }
     
     public final void setCGPA(){

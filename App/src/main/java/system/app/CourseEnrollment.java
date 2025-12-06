@@ -37,7 +37,8 @@ public class CourseEnrollment {
         finalTestGP = final_score;
         attemptNumber = attempt;
         failedComponents = failed;
-        setOverallGrade(); //Sets grade based on overall course grade point
+        setOverallGradePoint();
+        setOverallGrade();
     }
     
     public void incrementAttempt(){
@@ -74,8 +75,8 @@ public class CourseEnrollment {
         finalTestGP = score;
     }
     
-    public void setOverallGradePoint(int credit){
-        overallGradePoint = (assignmentGP + midtermTestGP + finalTestGP)/3*credit;
+    public final void setOverallGradePoint(){
+        overallGradePoint = ((assignmentGP * 0.3) + (midtermTestGP * 0.3) + (finalTestGP * 0.4))/25;
     }
     
     public final void setOverallGrade(){
