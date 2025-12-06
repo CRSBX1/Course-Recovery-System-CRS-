@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package system.app;
-import java.util.*;
+
 /**
  *
  * @author Lenovo
  */
-public class AcademicOfficer extends User {
+public class AcademicOfficer extends User_old {
     private String officeID;
     private String department;
     
