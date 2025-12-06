@@ -326,7 +326,7 @@ public class GenerateAcademicReportPanel extends JPanel {
             for (Student student : DataRepository.studentList) {
                 tableModel.addRow(new Object[]{
                     student.getStudentID(),
-                    student.getStudentName()
+                    student.getName()
                 });
             }
         }
@@ -345,9 +345,9 @@ public class GenerateAcademicReportPanel extends JPanel {
         if (selectedStudent != null) {
             // Update labels directly
             studentIDValueLabel.setText(selectedStudent.getStudentID());
-            fullNameValueLabel.setText(selectedStudent.getStudentName());
+            fullNameValueLabel.setText(selectedStudent.getName());
             intakeYearValueLabel.setText(String.valueOf(selectedStudent.getYear()));
-            majorValueLabel.setText(selectedStudent.getStudentProgram());
+            majorValueLabel.setText(selectedStudent.getProgram());
 
             // Generate report
             currentReport = new PerformanceReport(
@@ -365,7 +365,7 @@ public class GenerateAcademicReportPanel extends JPanel {
             // Update chart
             updateGradeDistributionChart();
 
-            System.out.println("✅ Student selected: " + selectedStudent.getStudentName());
+            System.out.println("✅ Student selected: " + selectedStudent.getName());
             System.out.println("✅ Report generated: " + currentReport.getReportID());
             System.out.println("✅ Buttons enabled!");
             System.out.println("📊 Chart updated!");
@@ -614,7 +614,7 @@ public class GenerateAcademicReportPanel extends JPanel {
 
             // Create temporary file
             String tempDir = System.getProperty("java.io.tmpdir");
-            String fileName = selectedStudent.getStudentName().replace(" ", "_") + "_Report_Preview.pdf";
+            String fileName = selectedStudent.getName().replace(" ", "_") + "_Report_Preview.pdf";
             String tempFilePath = tempDir + File.separator + fileName;
             File tempFile = new File(tempFilePath);
 
@@ -691,7 +691,7 @@ public class GenerateAcademicReportPanel extends JPanel {
         fileChooser.setDialogTitle("Save Report as PDF");
 
         // Default filename
-        String defaultName = selectedStudent.getStudentName().replace(" ", "_") + "_Report.pdf";
+        String defaultName = selectedStudent.getName().replace(" ", "_") + "_Report.pdf";
         fileChooser.setSelectedFile(new File(defaultName));
 
         // Set file filter for PDF only

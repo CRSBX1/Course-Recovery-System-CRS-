@@ -93,9 +93,9 @@ public class PerformanceReport {
         report.append("=".repeat(80)).append("\n\n");
         
         // Student Information - ✅ CONNECTED to Student class
-        report.append("Student Name: ").append(student.getStudentName()).append("\n");
+        report.append("Student Name: ").append(student.getName()).append("\n");
         report.append("Student ID: ").append(student.getStudentID()).append("\n");
-        report.append("Program: ").append(student.getStudentProgram()).append("\n");
+        report.append("Program: ").append(student.getProgram()).append("\n");
         report.append("Semester: ").append(semester).append("\n");
         report.append("Year: ").append(year).append("\n\n");
         
@@ -177,9 +177,9 @@ public class PerformanceReport {
             Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 11);
             
             document.add(new Paragraph("Student Information", headerFont));
-            document.add(new Paragraph("Student Name: " + student.getStudentName(), normalFont));
+            document.add(new Paragraph("Student Name: " + student.getName(), normalFont));
             document.add(new Paragraph("Student ID: " + student.getStudentID(), normalFont));
-            document.add(new Paragraph("Program: " + student.getStudentProgram(), normalFont));
+            document.add(new Paragraph("Program: " + student.getProgram(), normalFont));
             document.add(new Paragraph("Semester: " + semester, normalFont));
             document.add(new Paragraph("Year: " + year, normalFont));
             document.add(new Paragraph(" "));
@@ -271,6 +271,6 @@ public class PerformanceReport {
 
     public String formatReportData() {
         return String.format("Report[ID=%s, Student=%s, Semester=%d, Year=%s, CGPA=%.2f, Courses=%d]",
-            reportID, student.getStudentName(), semester, year, cgpa, enrollments.size());
+            reportID, student.getName(), semester, year, cgpa, enrollments.size());
     }
 }
