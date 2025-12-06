@@ -365,10 +365,10 @@ public class GenerateAcademicReportPanel extends JPanel {
             // Update chart
             updateGradeDistributionChart();
 
-            System.out.println("✅ Student selected: " + selectedStudent.getStudentName());
-            System.out.println("✅ Report generated: " + currentReport.getReportID());
-            System.out.println("✅ Buttons enabled!");
-            System.out.println("📊 Chart updated!");
+            System.out.println("Student selected: " + selectedStudent.getStudentName());
+            System.out.println("Report generated: " + currentReport.getReportID());
+            System.out.println("Buttons enabled!");
+            System.out.println("Chart updated!");
         }
     }
 
@@ -641,10 +641,10 @@ public class GenerateAcademicReportPanel extends JPanel {
                                 JOptionPane.INFORMATION_MESSAGE
                         );
 
-                        System.out.println("✅ PDF opened successfully!");
+                        System.out.println("PDF opened successfully!");
 
                     } catch (Exception ex) {
-                        System.err.println("❌ Error opening PDF: " + ex.getMessage());
+                        System.err.println("Error opening PDF: " + ex.getMessage());
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(
                                 GenerateAcademicReportPanel.this,
@@ -661,7 +661,7 @@ public class GenerateAcademicReportPanel extends JPanel {
             loadingDialog.setVisible(true);
 
         } catch (Exception ex) {
-            System.err.println("❌ Error in viewReport: " + ex.getMessage());
+            System.err.println("Error in viewReport: " + ex.getMessage());
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this,
                     "Error viewing report:\n" + ex.getMessage() + "\n\n"
@@ -680,7 +680,7 @@ public class GenerateAcademicReportPanel extends JPanel {
             return;
         }
 
-        System.out.println("📥 Download button clicked!");
+        System.out.println("Download button clicked!");
 
         // File chooser
         JFileChooser fileChooser = new JFileChooser();
@@ -715,9 +715,9 @@ public class GenerateAcademicReportPanel extends JPanel {
                         "Report saved successfully!\n\nLocation: " + filePath,
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("✅ PDF exported successfully!");
+                System.out.println("PDF exported successfully!");
             } catch (Exception ex) {
-                System.err.println("❌ Error exporting PDF: " + ex.getMessage());
+                System.err.println("Error exporting PDF: " + ex.getMessage());
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this,
                         "Error saving report: " + ex.getMessage(),
@@ -738,18 +738,239 @@ public class GenerateAcademicReportPanel extends JPanel {
 
         System.out.println("📧 Send Email button clicked!");
 
-        // PLACEHOLDER: Email functionality
-        String email = selectedStudent.getEmail();
-        JOptionPane.showMessageDialog(this,
-                "📧 Email Feature - Placeholder\n\n"
-                + "This feature will send the report to:\n"
-                + email + "\n\n"
-                + "Email functionality will be implemented in future version.\n"
-                + "(Requires Java Mail API integration)",
-                "Email Placeholder",
-                JOptionPane.INFORMATION_MESSAGE);
+        // Create email dialog
+        JDialog emailDialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this),
+                "Send Academic Report", true);
+        emailDialog.setLayout(new BorderLayout(10, 10));
+        emailDialog.setSize(500, 320);
+        emailDialog.setLocationRelativeTo(this);
 
-        System.out.println("📧 Email placeholder shown for: " + email);
+        // Main panel
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(Color.WHITE);
+
+        // Student info panel (light blue background)
+        JPanel studentInfoPanel = new JPanel();
+        studentInfoPanel.setLayout(new BoxLayout(studentInfoPanel, BoxLayout.Y_AXIS));
+        studentInfoPanel.setBackground(new Color(173, 216, 230));
+        studentInfoPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(100, 149, 237), 2),
+                BorderFactory.createEmptyBorder(15, 15, 15, 15)
+        ));
+
+        JLabel studentNameLabel = new JLabel("Student: " + selectedStudent.getStudentName());
+        studentNameLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        JLabel studentIDLabel = new JLabel("ID: " + selectedStudent.getStudentID());
+        studentIDLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        JLabel programLabel = new JLabel("Program: " + selectedStudent.getProgram());
+        programLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        studentInfoPanel.add(studentNameLabel);
+        studentInfoPanel.add(Box.createVerticalStrut(5));
+        studentInfoPanel.add(studentIDLabel);
+        studentInfoPanel.add(Box.createVerticalStrut(5));
+        studentInfoPanel.add(programLabel);
+
+        // Email input panel
+        JPanel emailPanel = new JPanel(new BorderLayout(5, 5));
+        emailPanel.setBackground(Color.WHITE);
+
+        JLabel emailLabel = new JLabel("Recipient Email:");
+        emailLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+
+        JTextField emailField = new JTextField(selectedStudent.getEmail());
+        emailField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        emailField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)
+        ));
+
+        JLabel hintLabel = new JLabel("You can edit the email address above to send to a different recipient");
+        hintLabel.setFont(new Font("Segoe UI", Font.ITALIC, 11));
+        hintLabel.setForeground(new Color(100, 100, 100));
+
+        emailPanel.add(emailLabel, BorderLayout.NORTH);
+        emailPanel.add(emailField, BorderLayout.CENTER);
+        emailPanel.add(hintLabel, BorderLayout.SOUTH);
+
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setOpaque(true);
+
+        // Cancel button
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setBackground(new Color(231, 76, 60));
+        cancelButton.setFocusPainted(false);
+        cancelButton.setBorderPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.setPreferredSize(new Dimension(120, 35));
+        cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        cancelButton.addActionListener(e -> emailDialog.dispose());
+
+        cancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelButton.setBackground(new Color(192, 57, 43));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelButton.setBackground(new Color(231, 76, 60));
+            }
+        });
+
+        // Send Email button
+        JButton sendButton = new JButton("Send Email");
+        sendButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        sendButton.setForeground(Color.WHITE);
+        sendButton.setBackground(new Color(46, 204, 113));
+        sendButton.setFocusPainted(false);
+        sendButton.setBorderPainted(false);
+        sendButton.setOpaque(true);
+        sendButton.setPreferredSize(new Dimension(120, 35));
+        sendButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        sendButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sendButton.setBackground(new Color(39, 174, 96));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sendButton.setBackground(new Color(46, 204, 113));
+            }
+        });
+
+        sendButton.addActionListener(e -> {
+            String recipientEmail = emailField.getText().trim();
+
+            // Validate email
+            if (recipientEmail.isEmpty()) {
+                JOptionPane.showMessageDialog(emailDialog,
+                        "Please enter an email address!",
+                        "Email Required",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (!isValidEmail(recipientEmail)) {
+                JOptionPane.showMessageDialog(emailDialog,
+                        "Please enter a valid email address!",
+                        "Invalid Email",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Confirm before sending
+            int confirm = JOptionPane.showConfirmDialog(emailDialog,
+                    "Send academic report to:\n" + recipientEmail + "\n\nContinue?",
+                    "Confirm Email",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            emailDialog.dispose();
+
+            // Send email in background using SwingWorker
+            SwingWorker<Void, Void> emailWorker = new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    System.out.println("Preparing to send email...");
+
+                    // Generate temp PDF
+                    String tempDir = System.getProperty("java.io.tmpdir");
+                    String fileName = selectedStudent.getStudentName().replace(" ", "_") + "_Academic_Report.pdf";
+                    String tempFilePath = tempDir + File.separator + fileName;
+                    File tempFile = new File(tempFilePath);
+
+                    System.out.println("Generating PDF at: " + tempFilePath);
+                    currentReport.exportToPDF(tempFilePath);
+
+                    // Get email body text
+                    String emailBody = currentReport.generateReport();
+
+                    // Prepare subject
+                    String subject = "Your Academic Performance Report - " + selectedStudent.getStudentName();
+
+                    System.out.println("Sending email via EmailPart...");
+
+                    // Send email using EmailPart
+                    EmailPart.sendReportWithAttachment(
+                            recipientEmail,
+                            subject,
+                            emailBody,
+                            tempFilePath
+                    );
+
+                    // Delete temp file
+                    if (tempFile.exists()) {
+                        tempFile.delete();
+                        System.out.println("Temporary PDF deleted");
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get(); // Check for exceptions
+                        JOptionPane.showMessageDialog(
+                                GenerateAcademicReportPanel.this,
+                                "Email sent successfully to:\n" + recipientEmail,
+                                "Email Sent",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                        System.out.println("Email sent successfully!");
+
+                    } catch (Exception ex) {
+                        System.err.println("Error sending email: " + ex.getMessage());
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(
+                                GenerateAcademicReportPanel.this,
+                                "Failed to send email:\n" + ex.getMessage()
+                                + "\n\nPlease check:\n"
+                                + "1. Email configuration in EmailConfiguration/config.properties\n"
+                                + "2. Internet connection\n"
+                                + "3. Email address is valid",
+                                "Email Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            };
+
+            emailWorker.execute();
+        });
+
+        buttonPanel.add(cancelButton);
+        buttonPanel.add(sendButton);
+
+        // Assemble dialog
+        mainPanel.add(studentInfoPanel, BorderLayout.NORTH);
+        mainPanel.add(emailPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        emailDialog.add(mainPanel);
+        emailDialog.validate();
+        emailDialog.repaint();
+        emailDialog.setVisible(true);
+    }
+
+    // Helper method for email validation
+    private boolean isValidEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+        // Basic email validation regex
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
     }
 
     /**
