@@ -1,0 +1,3 @@
+# User Data File - Format: userId|username|password|email|role|isActive|createdAt|lastLogin|createdBy
+ID100|officer1|officer123|officer1@apu.edu.my|ACADEMIC_OFFICER|true|2025-12-06T13:54:04|null|SYSTEM
+ID101|courseadmin1|course123|courseadmin1@apu.edu.my|COURSE_ADMINISTRATOR|true|2025-12-06T13:54:04|null|SYSTEM

@@ -8,7 +8,7 @@ package system.app;
  *
  * @author Lenovo
  */
-public class AcademicOfficer extends User_old {
+public class AcademicOfficer{
     private String officeID;
     private String department;
     

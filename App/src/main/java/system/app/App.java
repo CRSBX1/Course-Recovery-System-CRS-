@@ -4,6 +4,8 @@
 
 package system.app;
 import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Lenovo
@@ -22,6 +24,19 @@ public class App {
         DataRepository.loadEnrollData();
         DataRepository.linkAll();
 
-        EnrollStudentFrame frame = new EnrollStudentFrame();
+        //EnrollStudentFrame frame = new EnrollStudentFrame();
+        /**SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Generate Academic Report - Preview");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1440, 1024);
+
+            // Add your panel
+            frame.add(new GenerateAcademicReportPanel());
+
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });**/
+        
+        SwingUtilities.invokeLater(() -> new LoginFrame(new UserManager()));
     }
 }
