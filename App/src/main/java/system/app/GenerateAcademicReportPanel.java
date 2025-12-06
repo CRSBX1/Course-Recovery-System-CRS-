@@ -461,6 +461,10 @@ public class GenerateAcademicReportPanel extends JPanel {
         plot.setRangeGridlinePaint(Color.WHITE);
         plot.setOutlineVisible(false);
 
+        // Set Y-axis to display only INTEGER values (no decimals for course count)
+        org.jfree.chart.axis.NumberAxis rangeAxis = (org.jfree.chart.axis.NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(org.jfree.chart.axis.NumberAxis.createIntegerTickUnits());
+
         // Customize bar colors - different color for each grade
         // Color map for grades
         final Map<String, Color> gradeColors = new LinkedHashMap<>();
