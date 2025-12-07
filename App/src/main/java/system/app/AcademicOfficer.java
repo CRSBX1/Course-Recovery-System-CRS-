@@ -1,25 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package system.app;
+import system.app.User;
 
-/**
- *
- * @author Lenovo
- */
-public class AcademicOfficer extends User_old {
+public class AcademicOfficer extends User {
     private String officeID;
     private String department;
-    
+
+    public AcademicOfficer(String id, String username, String password, UserRole role, String createdBy, String officeID, String department) {
+        super(id, username, password, role, createdBy);
+        this.officeID = officeID;
+        this.department = department;
+    }
+
     public boolean enrollStudent(Student student){
         EligibilityChecker check = new EligibilityChecker();
         if(check.checkProgressionEligibility(student)){
-            //send email to student that they're allowed to enroll
             return true;
         }
         return false;
-        
     }
-    
 }
