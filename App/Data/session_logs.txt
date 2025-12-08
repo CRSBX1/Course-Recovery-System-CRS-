@@ -5,3 +5,7 @@ Format: Timestamp | Event | User | UserID
 2025-12-08 13:46:01 | LOGOUT | User: courseadmin1 | UserID: ID101
 2025-12-08 13:48:07 | LOGIN  | User: officer1 | UserID: ID100
 2025-12-08 13:48:09 | LOGOUT | User: officer1 | UserID: ID100
+2025-12-08 14:19:46 | LOGIN  | User: Antoni | UserID: ID104
+2025-12-08 14:19:54 | LOGOUT | User: Antoni | UserID: ID104
+2025-12-08 14:20:37 | LOGIN  | User: Aziz | UserID: ID103
+2025-12-08 14:20:50 | LOGOUT | User: Aziz | UserID: ID103

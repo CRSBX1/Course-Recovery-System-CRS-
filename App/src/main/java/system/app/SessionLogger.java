@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class SessionLogger {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final Path LOG_FILE = Paths.get(System.getProperty("user.dir"), "app", "Data", "session_logs.txt");
+    private static final Path LOG_FILE = Paths.get("Data", "session_logs.txt");
 
     /**
      * Log a login event
