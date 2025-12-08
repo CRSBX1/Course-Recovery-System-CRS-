@@ -8,10 +8,14 @@ package system.app;
  *
  * @author Lenovo
  */
-public class AcademicOfficer extends User_old {
+public class AcademicOfficer extends User {
     private String officeID;
     private String department;
-    
+
+    public AcademicOfficer(String username, String password, String email, UserRole role, String createdBy) {
+        super(username, password, email, role, createdBy);
+    }
+
     public boolean enrollStudent(Student student){
         EligibilityChecker check = new EligibilityChecker();
         if(check.checkProgressionEligibility(student)){

@@ -144,6 +144,7 @@ public class UserManager {
                 LoginSession session = new LoginSession(user);
                 activeSessions.put(session.getSessionId(), session);
                 user.setLastLogin(LocalDateTime.now());
+                SessionLogger.logLogin(user.getUsername(), user.getUserId()); // ADD THIS LINE
                 saveUsersToFile(); // persist last login
                 return session;
             }
@@ -154,6 +155,7 @@ public class UserManager {
     public boolean logout(String sessionId) {
         LoginSession session = activeSessions.remove(sessionId);
         if (session != null) {
+            SessionLogger.logLogout(session.getUser().getUsername(), session.getUser().getUserId()); // ADD THIS LINE
             session.endSession();
             saveUsersToFile();
             return true;
