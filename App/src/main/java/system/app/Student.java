@@ -22,56 +22,63 @@ public class Student {
     private List<Course> failedCourses = new ArrayList<>();
     private List<Course> allCourses = new ArrayList<>();
     private List<CourseEnrollment> enrollment = new ArrayList<>();
+    private String enrollStatus;
     
-    public Student(String id, String name, String email, String program, int year, int semester){
+    public Student(String id, String name, String email, String program, int year, int semester, String enrollStatus){
         studentID = id;
         fullName = name;
         this.email = email;
         this.program = program;
         this.year = year;
         this.semester = semester;
-        
-        enrollment = DataRepository.enrollList.stream()
-                .filter(i -> i.getStudentID().equals(id)).toList();
-        
-        for(CourseEnrollment i: enrollment){
-            for(Course e: DataRepository.courseList){
-                if(i.getCourseID().equals(e.getID()) & !i.getStatus().equals("Failed")){
-                    allCourses.add(e);
-                }
-                else if(i.getCourseID().equals(e.getID()) & i.getStatus().equals("Failed")){
-                    failedCourses.add(e);
-                }
-            }
-        }
+        this.enrollStatus = enrollStatus;
     }
     
     public void addFailedCourse(Course course) {
         failedCourses.add(course);
     }
     
-    public String getName(){
+    public String getStudentID(){
+        return studentID;
+    }
+    
+    public String getStudentName(){
         return fullName;
     }
     
-    public double getTotalGradePoints() {
-        totalGradePoints = 0;
-        for(CourseEnrollment i: enrollment){
-            totalGradePoints += i.getOverallGradePoint();
-        }
+    public String getEmail(){
+        return email;
+    }
+    
+    public String getStudentProgram(){
+        return program;
+    }
+    
+    public int getYear(){
+        return year;
+    }
+    
+    public int getSemester(){
+        return semester;
+    }
+    
+    public String getEnrollStatus(){
+        return enrollStatus;
+    }
+    
+    public List<CourseEnrollment> getAllEnrollments(){
+        return enrollment;
+    }
+    
+    public final double getTotalGradePoints() {
         return totalGradePoints;
     }
     
-    public int getTotalCreditHours() {
-        totalCreditHours = 0;
-        for(Course e: allCourses){
-            totalCreditHours += e.getCreditHours();  
-        }
+    public final int getTotalCreditHours() {
         return totalCreditHours;
     }
     
-    public double getCGPA(){
-        cgpa = getTotalGradePoints()/getTotalCreditHours();
+    public final double getCGPA(){
         return cgpa;
     }
     
@@ -81,6 +88,41 @@ public class Student {
     
     public double getFailedCoursesCount() {
         return failedCourses.size();
+    }
+    public List<CourseEnrollment> getEnrollment() {
+        return enrollment;
+    }
+
+    public String getProgram() {
+        return program;
+    }
+    
+    public void setEnrollStatus(String status){
+        enrollStatus = status;
+    }
+    
+    public void setEnrollment(List<CourseEnrollment> list){ //set the enrollment list; not to be confused with enrollment status
+        enrollment = list;
+    }
+    
+    public void setFailedCourses(List<Course> course){
+        failedCourses = course;
+    }
+    
+    public void setAllCourses(List<Course> course){
+        allCourses = course;
+    }
+    
+    public final void setTotalGradePoints(double gp) {
+        totalGradePoints = gp;
+    }
+    
+    public final void setTotalCreditHours(int ch) {
+        totalCreditHours = ch;
+    }
+    
+    public final void setCGPA(){
+        cgpa = totalGradePoints/totalCreditHours;
     }
     
     public void updateAcademicInfo() {

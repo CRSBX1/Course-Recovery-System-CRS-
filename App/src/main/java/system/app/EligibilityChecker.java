@@ -9,11 +9,13 @@ import java.util.*;
  * @author Lenovo
  */
 public class EligibilityChecker {
-    private double minimumCGPA = 2.0;
-    private int maximumFailedCourses = 3;
     
     public boolean checkProgressionEligibility(Student student){
-        return student.getFailedCoursesCount()>3 | student.getCGPA()<2.0;
+        return student.getFailedCoursesCount()<=3 & student.getCGPA()>2.0;
+    }
+    
+    public boolean checkEnrollmentStatus(Student student){
+        return student.getEnrollStatus().equals("Enrolled");
     }
     
     public boolean checkFailedCoursesCriteria(Student student){

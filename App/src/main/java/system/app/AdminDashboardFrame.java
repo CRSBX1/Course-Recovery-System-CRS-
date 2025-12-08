@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DashboardFrame extends JFrame {
+public class AdminDashboardFrame extends JFrame {
 
     private final UserManager userManager;
     private final LoginSession session;
@@ -19,8 +19,9 @@ public class DashboardFrame extends JFrame {
     private JPanel mainContent;
     private DefaultTableModel tableModel;
     private JTable table;
+    private TitlePanel titlePanel;
 
-    public DashboardFrame(UserManager userManager, LoginSession session) {
+    public AdminDashboardFrame(UserManager userManager, LoginSession session) {
         this.userManager = userManager;
         this.session = session;
 
@@ -48,11 +49,10 @@ public class DashboardFrame extends JFrame {
 
     private JPanel createTopBar() {
         JPanel topBar = new JPanel(new BorderLayout());
-        topBar.setBackground(new Color(0, 60, 113));
-        topBar.setPreferredSize(new Dimension(0, 60));
-        topBar.setBorder(new EmptyBorder(10, 20, 10, 20));
-
-        // Left side - Logo and title
+        topBar.setPreferredSize(new Dimension(0, 80));
+        
+        titlePanel = new TitlePanel();
+        /*// Left side - Logo and title
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
         leftPanel.setOpaque(false);
 
@@ -84,16 +84,15 @@ public class DashboardFrame extends JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 logoutBtn.setBackground(new Color(220, 53, 69));
             }
-        });
+        });*/
 
-        logoutBtn.addActionListener(e -> {
+        titlePanel.getLogoutButton().addActionListener(e -> {
             userManager.logout(session.getSessionId());
             dispose();
             new LoginFrame(userManager);
         });
 
-        topBar.add(leftPanel, BorderLayout.WEST);
-        topBar.add(logoutBtn, BorderLayout.EAST);
+        topBar.add(titlePanel);
 
         return topBar;
     }
@@ -206,7 +205,7 @@ public class DashboardFrame extends JFrame {
 
         mainContent = new JPanel();
         mainContent.setLayout(new BorderLayout());
-        mainContent.setBackground(new Color(248, 249, 250));
+        mainContent.setBackground(Color.white);
         mainContent.setBorder(new EmptyBorder(30, 30, 30, 30));
 
         // Welcome message
@@ -250,7 +249,7 @@ public class DashboardFrame extends JFrame {
 
         mainContent = new JPanel();
         mainContent.setLayout(new BorderLayout());
-        mainContent.setBackground(new Color(248, 249, 250));
+        mainContent.setBackground(Color.white);
         mainContent.setBorder(new EmptyBorder(30, 30, 30, 30));
 
         // Title

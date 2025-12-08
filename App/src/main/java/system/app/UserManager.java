@@ -18,8 +18,7 @@ public class UserManager {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
     // Updated: file where users are persisted in existing Data folder
-    // Use absolute path to ensure we find the correct Data folder
-    private static final Path USERS_FILE = Paths.get(System.getProperty("user.dir"), "app", "Data", "users.txt");
+    private static final Path USERS_FILE = Paths.get("Data/Users.txt");
 
     public UserManager() {
         // DEBUG: Print paths to verify location

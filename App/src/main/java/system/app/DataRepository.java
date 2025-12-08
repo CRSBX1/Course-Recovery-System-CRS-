@@ -26,4 +26,82 @@ public class DataRepository {
         courseList = FileUtils.readFromFile("Data/Course.txt", FileUtils::parseCourse);
     }
     
+    public static Student findStudentByID(String ID){
+        for(Student i: studentList) {
+            if(i.getStudentID().equals(ID)){
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    public static Course findCourseByID(String id){
+       for(Course c: DataRepository.courseList){
+           if(c.getID().equals(id)){
+               return c;
+           }
+       }
+       return null;
+    }
+    
+    public static int getPendingApproval(){
+        int totalStudent = 0;
+        for(Student s: DataRepository.studentList){
+            if(s.getCGPA()>2.0 && s.getFailedCoursesCount()<=3 && s.getEnrollStatus().equals("Not Enrolled")){
+                totalStudent +=1;
+            }
+        }
+        return totalStudent;
+    }
+    
+    public static int getRecoveringStudent(){
+        int totalStudent = 0;
+        for(Student s: DataRepository.studentList){
+            if(s.getCGPA()<2.0 || s.getFailedCoursesCount()>3){
+                totalStudent +=1;
+            }
+        }
+        return totalStudent;
+    }
+    
+    public static int getRecoveredStudents(){
+        int totalStudent = 0;
+        for (Student s: DataRepository.studentList){
+            if(s.getEnrollStatus().equals("Enrolled")){
+                totalStudent += 1;
+            }
+        }
+        return totalStudent;
+    }
+    
+    public static void linkAll() {
+        for (Student s : studentList) {
+            int totalScore = 0;
+            int totalCredit = 0;
+            List<CourseEnrollment> eList = enrollList.stream()
+                    .filter(e -> e.getStudentID().equals(s.getStudentID()))
+                    .toList();
+
+            s.setEnrollment(eList);
+
+            List<Course> failed = new ArrayList<>();
+            List<Course> all = new ArrayList<>();
+
+            for (CourseEnrollment ce : eList) {
+                Course course = findCourseByID(ce.getCourseID());
+                totalScore += ce.getOverallGradePoint() * course.getCreditHours();
+                totalCredit += course.getCreditHours();
+                all.add(course);
+                if (!ce.getStatus().equals("Passed")) {
+                    failed.add(course);
+                } 
+            }
+            
+            s.setFailedCourses(failed);
+            s.setAllCourses(all);
+            s.setTotalGradePoints(totalScore);
+            s.setTotalCreditHours(totalCredit);
+            s.setCGPA();
+        }
+    }
 }

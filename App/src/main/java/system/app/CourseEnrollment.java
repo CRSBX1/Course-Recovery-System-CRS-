@@ -35,10 +35,10 @@ public class CourseEnrollment {
         assignmentGP = asg_score;
         midtermTestGP = mid_score;
         finalTestGP = final_score;
-        overallGradePoint = (asg_score + mid_score + final_score)/3;
         attemptNumber = attempt;
         failedComponents = failed;
-        setOverallGrade(); //Sets grade based on overall course grade point
+        setOverallGradePoint();
+        setOverallGrade();
     }
     
     public void incrementAttempt(){
@@ -75,8 +75,8 @@ public class CourseEnrollment {
         finalTestGP = score;
     }
     
-    public void setOverallGradePoint(){
-        overallGradePoint = (assignmentGP + midtermTestGP + finalTestGP)/3;
+    public final void setOverallGradePoint(){
+        overallGradePoint = ((assignmentGP * 0.3) + (midtermTestGP * 0.3) + (finalTestGP * 0.4))/25;
     }
     
     public final void setOverallGrade(){
@@ -126,7 +126,11 @@ public class CourseEnrollment {
         return courseID;
     }
     
-    public List<String> getFailedComponent(String component){
+    public int getAttempts(){
+        return attemptNumber;
+    }
+    
+    public List<String> getFailedComponent(){
         return failedComponents;
     }
     
