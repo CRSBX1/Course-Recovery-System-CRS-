@@ -1,6 +1,7 @@
 # User Data File - Format: userId|username|password|email|role|isActive|createdAt|lastLogin|createdBy
-ID100|officer1|officer123|officer1@apu.edu.my|ACADEMIC_OFFICER|false|2025-11-28T11:26:26|2025-11-28T12:08:24|SYSTEM
-ID101|courseadmin1|course123|courseadmin1@apu.edu.my|COURSE_ADMINISTRATOR|true|2025-11-28T11:26:26|2025-12-08T12:40:19|SYSTEM
-ID102|Steve|123456|Steve@mail.com|ACADEMIC_OFFICER|true|2025-11-28T11:27:23|2025-12-07T00:27:14|CourseAdmin
+ID100|officer1|officer123|officer1@apu.edu.my|ACADEMIC_OFFICER|true|2025-11-28T11:26:26|2025-11-28T12:08:24|SYSTEM
+ID101|courseadmin1|course123|courseadmin1@apu.edu.my|COURSE_ADMINISTRATOR|true|2025-11-28T11:26:26|2025-12-08T15:53:12|SYSTEM
+ID102|Steve|123456|Stevesuher@mail.com|COURSE_ADMINISTRATOR|true|2025-11-28T11:27:23|2025-12-07T00:27:14|CourseAdmin
 ID103|Aziz|654321|aziz@mail.com|ACADEMIC_OFFICER|true|2025-11-30T23:17:37|2025-12-08T14:20:37|courseadmin1
 ID104|Antoni|Anto123|antonilawrence8@gmail.com|ACADEMIC_OFFICER|true|2025-12-06T15:26:28|2025-12-08T15:10:33|Steve
+ID105|Suhedad|suhe123|suhedad@mail.apu.edu.my|ACADEMIC_OFFICER|true|2025-12-08T15:54:22|2025-12-08T15:55:57|courseadmin1

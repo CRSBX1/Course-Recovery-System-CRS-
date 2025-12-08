@@ -12,3 +12,9 @@ Format: Timestamp | Event | User | UserID
 2025-12-08 14:50:57 | LOGIN  | User: Antoni | UserID: ID104
 2025-12-08 14:54:24 | LOGOUT | User: Antoni | UserID: ID104
 2025-12-08 15:10:33 | LOGIN  | User: Antoni | UserID: ID104
+2025-12-08 15:53:12 | LOGIN  | User: courseadmin1 | UserID: ID101
+2025-12-08 15:54:26 | LOGOUT | User: courseadmin1 | UserID: ID101
+2025-12-08 15:54:37 | LOGIN  | User: Suhedad | UserID: ID105
+2025-12-08 15:55:27 | LOGOUT | User: Suhedad | UserID: ID105
+2025-12-08 15:55:57 | LOGIN  | User: Suhedad | UserID: ID105
+2025-12-08 15:57:48 | LOGOUT | User: Suhedad | UserID: ID105

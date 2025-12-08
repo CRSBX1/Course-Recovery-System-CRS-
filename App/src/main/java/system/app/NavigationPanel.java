@@ -36,7 +36,7 @@ public class NavigationPanel extends JPanel{
         //Configure Enrollment Button
         btnEnroll = createSidebarButton("✓  Eligibility Check", false);
         
-        btnTrack = createSidebarButton("🎯 Track and Set Student Progress",false);
+        btnTrack = createSidebarButton("🎯 Track/Set Progress",false);
         
         // Add buttons with spacing
         add(Box.createVerticalStrut(20));
