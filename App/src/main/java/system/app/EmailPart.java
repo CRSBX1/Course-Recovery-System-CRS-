@@ -88,6 +88,25 @@ public class EmailPart {
             e.printStackTrace();
         }
     }
+    
+    public static void sendReset(String email, String token) {
+        try {
+            MailConfig mc = loadConfig();
+            Session session = getMailSession(mc);
+            session.setDebug(true);
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(mc.fromAddress));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("Password Reset");
+            String body = "Your password reset token is: " + token;
+            message.setText(body);
+            Transport.send(message);
+        } catch (Exception e) {
+            System.out.println("Error sending enrollment email: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     public static void sendReportWithAttachment(String toEmail, String subject,
             String textBody, String pdfPath) throws MessagingException, IOException {

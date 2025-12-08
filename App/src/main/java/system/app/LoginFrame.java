@@ -126,7 +126,12 @@ public class LoginFrame extends JFrame {
 
             try {
                 String token = userManager.generateRecoveryToken(email.trim());
-                new TokenWindow(this, token).setVisible(true);
+                EmailPart.sendReset(email.trim(), token);
+                JOptionPane.showMessageDialog(this,
+                        "A recovery token has been sent to your email.",
+                        "Password Recovery",
+                        JOptionPane.INFORMATION_MESSAGE);
+                new TokenVerifyWindow(this).setVisible(true);
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this,
                         ex.getMessage(),
@@ -157,40 +162,9 @@ public class LoginFrame extends JFrame {
         setVisible(true);
     }
 
-    // TOKEN WINDOW (COPYABLE TOKEN + CONTINUE BUTTON)
-    private class TokenWindow extends JDialog {
-        public TokenWindow(Frame parent, String token) {
-            super(parent, "Your Recovery Token", true);
-            setSize(400, 200);
-            setLocationRelativeTo(parent);
-            setLayout(new BorderLayout(10, 10));
-
-            JTextArea tokenArea = new JTextArea(token);
-            tokenArea.setEditable(false);
-            tokenArea.setFont(new Font("Monospaced", Font.BOLD, 16));
-            tokenArea.setLineWrap(true);
-            tokenArea.setWrapStyleWord(true);
-
-            JScrollPane scrollPane = new JScrollPane(tokenArea);
-
-            JButton continueBtn = new JButton("Continue");
-            continueBtn.addActionListener(e -> {
-                dispose();
-                new TokenVerifyWindow(parent, token).setVisible(true);
-            });
-
-            JPanel bottom = new JPanel();
-            bottom.add(continueBtn);
-
-            add(new JLabel("  Copy your token below:"), BorderLayout.NORTH);
-            add(scrollPane, BorderLayout.CENTER);
-            add(bottom, BorderLayout.SOUTH);
-        }
-    }
-
     // TOKEN VERIFICATION WINDOW (BACK + RESET PASSWORD)
     private class TokenVerifyWindow extends JDialog {
-        public TokenVerifyWindow(Frame parent, String token) {
+        public TokenVerifyWindow(Frame parent) {
             super(parent, "Verify Recovery Token", true);
             setSize(400, 230);
             setLocationRelativeTo(parent);
@@ -200,9 +174,8 @@ public class LoginFrame extends JFrame {
             JPasswordField newPassField = new JPasswordField();
 
             JButton resetBtn = new JButton("Reset Password");
-            JButton backBtn = new JButton("Back to Token");
+            JButton cancelBtn = new JButton("Cancel");
 
-            // RESET PASSWORD LOGIC
             resetBtn.addActionListener(e -> {
                 String enteredToken = tokenField.getText().trim();
                 String newPass = new String(newPassField.getPassword()).trim();
@@ -230,15 +203,11 @@ public class LoginFrame extends JFrame {
                 }
             });
 
-            // BACK BUTTON
-            backBtn.addActionListener(e -> {
-                dispose();
-                new TokenWindow(parent, token).setVisible(true);
-            });
+            cancelBtn.addActionListener(e -> dispose());
 
             JPanel bottom = new JPanel();
             bottom.add(resetBtn);
-            bottom.add(backBtn);
+            bottom.add(cancelBtn);
 
             add(new JLabel("  Enter Recovery Token:"));
             add(tokenField);
