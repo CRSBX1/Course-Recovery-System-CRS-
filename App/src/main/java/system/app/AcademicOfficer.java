@@ -11,7 +11,11 @@ package system.app;
 public class AcademicOfficer{
     private String officeID;
     private String department;
-    
+
+    public AcademicOfficer(String username, String password, String email, UserRole role, String createdBy) {
+        super(username, password, email, role, createdBy);
+    }
+
     public boolean enrollStudent(Student student){
         EligibilityChecker check = new EligibilityChecker();
         if(check.checkProgressionEligibility(student)){
