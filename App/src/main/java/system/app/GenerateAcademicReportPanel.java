@@ -46,7 +46,7 @@ public class GenerateAcademicReportPanel extends JPanel {
     public GenerateAcademicReportPanel() {
         setLayout(new BorderLayout(30, 30));
         setBackground(Color.WHITE);
-        setBorder(BorderFactory.createEmptyBorder(40, 50, 40, 50));
+        setBorder(BorderFactory.createEmptyBorder(10, 50, 40, 50));
         setPreferredSize(new Dimension(1440, 1024));
 
         initComponents();
@@ -168,12 +168,12 @@ public class GenerateAcademicReportPanel extends JPanel {
 
         // Student Details (takes less space now)
         gbc.gridy = 0;
-        gbc.weighty = 0.45;
+        gbc.weighty = 0.2;
         rightPanel.add(createStudentDetailsPanel(), gbc);
 
         // Grade Chart (takes more space)
         gbc.gridy = 1;
-        gbc.weighty = 0.55;
+        gbc.weighty = 0.8;
         gbc.insets = new Insets(20, 0, 0, 0);
         rightPanel.add(createChartPanel(), gbc);
 

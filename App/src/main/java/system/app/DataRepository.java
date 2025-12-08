@@ -42,7 +42,37 @@ public class DataRepository {
            }
        }
        return null;
-   }
+    }
+    
+    public static int getPendingApproval(){
+        int totalStudent = 0;
+        for(Student s: DataRepository.studentList){
+            if(s.getCGPA()>2.0 && s.getFailedCoursesCount()<=3 && s.getEnrollStatus().equals("Not Enrolled")){
+                totalStudent +=1;
+            }
+        }
+        return totalStudent;
+    }
+    
+    public static int getRecoveringStudent(){
+        int totalStudent = 0;
+        for(Student s: DataRepository.studentList){
+            if(s.getCGPA()<2.0 || s.getFailedCoursesCount()>3){
+                totalStudent +=1;
+            }
+        }
+        return totalStudent;
+    }
+    
+    public static int getRecoveredStudents(){
+        int totalStudent = 0;
+        for (Student s: DataRepository.studentList){
+            if(s.getEnrollStatus().equals("Enrolled")){
+                totalStudent += 1;
+            }
+        }
+        return totalStudent;
+    }
     
     public static void linkAll() {
         for (Student s : studentList) {

@@ -102,9 +102,11 @@ public class LoginFrame extends JFrame {
 
             if (session != null) {
                 dispose();
-                
-                
-                new AdminDashboardFrame(userManager, session);
+                if(session.getUser().getRole().getDisplayName().equals("Academic Officer")){
+                    new OfficerDashboardFrame(userManager, session);
+                } else{
+                    new AdminDashboardFrame(userManager, session);
+                }
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Invalid username or password",
@@ -244,9 +246,5 @@ public class LoginFrame extends JFrame {
             add(newPassField);
             add(bottom);
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginFrame(new UserManager()));
     }
 }

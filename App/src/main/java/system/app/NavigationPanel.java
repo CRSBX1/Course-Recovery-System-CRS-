@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package system.app;
+
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
-/**
- *
- * @author Lenovo
- */
+import java.awt.event.*;
+
 public class NavigationPanel extends JPanel{
     private JButton btnDashboard;
     private JButton btnCourseRecovery;
@@ -18,35 +13,117 @@ public class NavigationPanel extends JPanel{
     private Font btnFont;
     
     public NavigationPanel(){
-        setLayout(null);
-        setBackground(new Color(0xF5F5F5)); //set color to whitesmoke
+        //Main Panel content
+        
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(Color.WHITE);
+        setPreferredSize(new Dimension(220, 0));
+        setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230, 230, 230)));
         
         //Configure button text font
-        btnFont = new Font("Arial", Font.BOLD,20);
+        btnFont = new Font("SansSerif", Font.BOLD, 12);
         
         //Configure dashboard button
-        btnDashboard = new JButton("Dashboard");
-        btnDashboard.setFont(btnFont);
-        btnDashboard.setBounds(0,0,275,100);
+        btnDashboard = createSidebarButton("📊  Dashboard", true);
         
         //Configure Course Recovery Plan Button
-        btnCourseRecovery = new JButton("Course Recovery Plan");
-        btnCourseRecovery.setFont(btnFont);
-        btnCourseRecovery.setBounds(0, 100, 275, 100);
+        btnCourseRecovery = createSidebarButton("📚  Course Recovery Plan", false);
         
         //Configure Academic Report Button
-        btnAcademicReport = new JButton("<html>Generate Academic Report</html>");
-        btnAcademicReport.setFont(btnFont);
-        btnAcademicReport.setBounds(0,200,275,100);
+        btnAcademicReport = createSidebarButton("📝  Generate Academic Report", false);
         
         //Configure Enrollment Button
-        btnEnroll = new JButton("<html>Eligibility Check and Enrollment</html>");
-        btnEnroll.setFont(btnFont);
-        btnEnroll.setBounds(0, 300, 275, 100);
+        btnEnroll = createSidebarButton("✓  Eligibility Check", false);
         
+        // Add buttons with spacing
+        add(Box.createVerticalStrut(20));
         add(btnDashboard);
+        add(Box.createVerticalStrut(5));
         add(btnCourseRecovery);
+        add(Box.createVerticalStrut(5));
         add(btnAcademicReport);
+        add(Box.createVerticalStrut(5));
         add(btnEnroll);
+        
+        // Push everything to top, leaving bottom space
+        add(Box.createVerticalGlue());
+        
+        /*
+        JPanel userInfo = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
+        userInfo.setBackground(Color.WHITE);
+        userInfo.setMaximumSize(new Dimension(220, 60));
+        userInfo.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(230, 230, 230)));
+        
+        JLabel userIcon = new JLabel("👤");
+        userIcon.setFont(new Font("Serif", Font.PLAIN, 24));
+        
+        JLabel userName = new JLabel("Admin User");
+        userName.setFont(new Font("SansSerif", Font.BOLD, 14));
+        
+        userInfo.add(userIcon);
+        userInfo.add(userName);
+        
+        add(userInfo);
+        */
+    }
+    
+    public void updateButtonStyle(JButton btn, boolean active) {
+        if (active) {
+            btn.setBackground(new Color(240, 248, 255)); // Light blue
+            btn.setForeground(new Color(30, 144, 255)); // Dodger blue
+            btn.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(30, 144, 255)),
+                BorderFactory.createEmptyBorder(15, 20, 15, 10)
+            ));
+        } else {
+            btn.setBackground(Color.WHITE);
+            btn.setForeground(new Color(60, 60, 60));
+            btn.setBorder(BorderFactory.createEmptyBorder(15, 23, 15, 10));
+        }
+    }
+    
+    private JButton createSidebarButton(String text, boolean isActive) {
+        JButton button = new JButton(text);
+        button.setFont(btnFont);
+        button.setMaximumSize(new Dimension(220, 60));
+        button.setAlignmentX(Component.LEFT_ALIGNMENT);
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        // Style based on active state
+        if (isActive) {
+            button.setBackground(new Color(240, 248, 255)); // Light blue
+            button.setForeground(new Color(30, 144, 255)); // Dodger blue
+            button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(30, 144, 255)),
+                BorderFactory.createEmptyBorder(15, 20, 15, 10)
+            ));
+        } else {
+            button.setBackground(Color.WHITE);
+            button.setForeground(new Color(60, 60, 60));
+            button.setBorder(BorderFactory.createEmptyBorder(15, 23, 15, 10));
+        }
+        
+        return button;
+    }
+    
+    // Getter methods to access buttons for action listeners
+    public JButton getDashboardButton() {
+        return btnDashboard;
+    }
+    
+    public JButton getCourseRecoveryButton() {
+        return btnCourseRecovery;
+    }
+    
+    public JButton getAcademicReportButton() {
+        return btnAcademicReport;
+    }
+    
+    public JButton getEnrollButton() {
+        return btnEnroll;
     }
 }
