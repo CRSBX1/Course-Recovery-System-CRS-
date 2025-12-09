@@ -6,6 +6,6 @@ S000005,Mateo Hernandez,Mateo05@university.edu,Software Engineering,2024,5,Not E
 S000006,Marco Van Basten,Marco06@university.edu,Food Science,2023,7,Not Enrolled
 S000007,Bruce Banner,Bruce07@university.edu,Software Engineering,2024,5,Not Enrolled
 S000008,Steven Cook,Steven08@university.edu,Electrical Engineering,2025,3,Not Enrolled
-S000009,Stephen Cook,Stephen09@university.edu,Aerospace Engineering,2025,3,Not Enrolled
-S000010,Joe Parks,antonilawrence8@gmail.com,Data Analytics,2024,5,Not Enrolled
+S000009,Stephen Cook,antonilawrence3@gmail.com,Aerospace Engineering,2025,3,Enrolled
+S000010,Joe Parks,antonilawrence8@gmail.com,Data Analytics,2024,5,Enrolled
 S000011,Lionel Pessi,antonilawrence3@gmail.com,Data Analytics,2024,5,Enrolled

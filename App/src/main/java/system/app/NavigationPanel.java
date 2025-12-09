@@ -113,4 +113,8 @@ public class NavigationPanel extends JPanel{
     public JButton getEnrollButton() {
         return btnEnroll;
     }
+    
+    public JButton getTrackButton(){
+        return btnTrack;
+    }
 }

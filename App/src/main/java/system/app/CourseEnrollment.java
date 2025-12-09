@@ -41,10 +41,6 @@ public class CourseEnrollment {
         setOverallGrade();
     }
     
-    public void incrementAttempt(){
-       attemptNumber += 1; 
-    }
-    
     public boolean isMaxAttemptsReached(){
         return attemptNumber == 3;
     }
@@ -61,6 +57,10 @@ public class CourseEnrollment {
     
     public void setStatus(String status){
         this.status = status;
+    }
+    
+    public void setAttempt(int attempt){
+        attemptNumber = attempt;
     }
     
     public void setAssignmentGradePoint(double score){
@@ -117,6 +117,14 @@ public class CourseEnrollment {
             overallGrade = "F";
         }
     }
+    
+    public void setFailedComponents(ArrayList<String> components){
+        failedComponents = components;
+    }
+    
+    public String getEnrollID(){
+        return enrollmentID;
+    }
 
     public String getStudentID() {
         return studentID;
@@ -124,6 +132,10 @@ public class CourseEnrollment {
     
     public String getCourseID() {
         return courseID;
+    }
+    
+    public LocalDate getEnrollDate(){
+        return enrollmentDate;
     }
     
     public int getAttempts(){

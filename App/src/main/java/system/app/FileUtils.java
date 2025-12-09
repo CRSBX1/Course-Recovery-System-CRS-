@@ -91,4 +91,38 @@ public class FileUtils {
         }
         return studentMap;
     }
+    
+    public static HashMap writeEnroll(){
+        int counter = 0;
+        String enroll;
+        HashMap<Integer,String> enrollMap = new HashMap<>();
+        for(CourseEnrollment i: DataRepository.enrollList){
+            switch (i.getFailedComponent().size()) {
+                case 3:
+                    {
+                        enroll = i.getEnrollID()+","+i.getStudentID()+","+i.getCourseID()+","+i.getEnrollDate()+","+i.getStatus()+","+i.getAssignmentGradePoint()+","+i.getMidtermTestGradePoint()+","+i.getFinalTestGradePoint()+","+i.getAttempts()+","+i.getFailedComponent().get(0)+","+i.getFailedComponent().get(1)+","+i.getFailedComponent().get(2)+"\n";
+                        break;
+                    }
+                case 2:
+                    {
+                        enroll = i.getEnrollID()+","+i.getStudentID()+","+i.getCourseID()+","+i.getEnrollDate()+","+i.getStatus()+","+i.getAssignmentGradePoint()+","+i.getMidtermTestGradePoint()+","+i.getFinalTestGradePoint()+","+i.getAttempts()+","+i.getFailedComponent().get(0)+","+i.getFailedComponent().get(1)+"\n";
+                        break;
+                    }
+                case 1:
+                    {
+                        enroll = i.getEnrollID()+","+i.getStudentID()+","+i.getCourseID()+","+i.getEnrollDate()+","+i.getStatus()+","+i.getAssignmentGradePoint()+","+i.getMidtermTestGradePoint()+","+i.getFinalTestGradePoint()+","+i.getAttempts()+","+i.getFailedComponent().get(0)+"\n";
+                        break;
+                    }
+                default:
+                    {
+                        enroll = i.getEnrollID()+","+i.getStudentID()+","+i.getCourseID()+","+i.getEnrollDate()+","+i.getStatus()+","+i.getAssignmentGradePoint()+","+i.getMidtermTestGradePoint()+","+i.getFinalTestGradePoint()+","+i.getAttempts()+"\n";
+                        break;
+                    }
+            }
+            String credentials = enroll;
+            enrollMap.put(counter, credentials);
+            counter++;
+        }
+        return enrollMap;
+    }
 }

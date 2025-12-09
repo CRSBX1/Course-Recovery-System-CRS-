@@ -23,6 +23,7 @@ public class OfficerDashboardFrame extends JFrame{
     private GenerateAcademicReportPanel reportPanel;
     private EnrollStudentPanel enrollPanel;
     private RecoveryPlanPanel planPanel;
+    private TrackSetStudentProgressPanel trackPanel;
     
     public OfficerDashboardFrame(UserManager userManager, LoginSession session){
         this.userManager = userManager;
@@ -62,6 +63,7 @@ public class OfficerDashboardFrame extends JFrame{
             naviPanel.updateButtonStyle(naviPanel.getCourseRecoveryButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getAcademicReportButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getEnrollButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getTrackButton(), false);
             showDashboard();
         });
         
@@ -70,6 +72,7 @@ public class OfficerDashboardFrame extends JFrame{
             naviPanel.updateButtonStyle(naviPanel.getCourseRecoveryButton(), true);
             naviPanel.updateButtonStyle(naviPanel.getAcademicReportButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getEnrollButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getTrackButton(), false);
             showCourseRecovery();
         });
         
@@ -78,6 +81,7 @@ public class OfficerDashboardFrame extends JFrame{
             naviPanel.updateButtonStyle(naviPanel.getCourseRecoveryButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getAcademicReportButton(), true);
             naviPanel.updateButtonStyle(naviPanel.getEnrollButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getTrackButton(), false);
             showAcademicReport();
         });
         
@@ -86,7 +90,17 @@ public class OfficerDashboardFrame extends JFrame{
             naviPanel.updateButtonStyle(naviPanel.getCourseRecoveryButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getAcademicReportButton(), false);
             naviPanel.updateButtonStyle(naviPanel.getEnrollButton(), true);
+            naviPanel.updateButtonStyle(naviPanel.getTrackButton(), false);
             showEnrollment();
+        });
+        
+        naviPanel.getTrackButton().addActionListener((ActionEvent e) -> {
+            naviPanel.updateButtonStyle(naviPanel.getDashboardButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getCourseRecoveryButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getAcademicReportButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getEnrollButton(), false);
+            naviPanel.updateButtonStyle(naviPanel.getTrackButton(), true);
+            showTrack();
         });
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,6 +168,14 @@ public class OfficerDashboardFrame extends JFrame{
         contentPanel.removeAll();
         enrollPanel = new EnrollStudentPanel(this);
         contentPanel.add(enrollPanel, BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    }
+    
+    private void showTrack(){
+        contentPanel.removeAll();
+        trackPanel = new TrackSetStudentProgressPanel();
+        contentPanel.add(trackPanel, BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();
     }

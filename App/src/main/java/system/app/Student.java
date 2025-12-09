@@ -86,7 +86,7 @@ public class Student {
         return failedCourses;
     }
     
-    public double getFailedCoursesCount() {
+    public int getFailedCoursesCount() {
         return failedCourses.size();
     }
     public List<CourseEnrollment> getEnrollment() {
